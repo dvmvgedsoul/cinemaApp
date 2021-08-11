@@ -1,0 +1,53 @@
+<%- include('header') -%>
+
+<section class="join">
+    <div class="container">
+        <div class="join__wrapper">
+            <p>Стань частью огромного сообщества поклонников
+                хоррор-жанра</p>
+            <form action="/register">
+                <button class="join__btn">Присоединиться</button>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="features">
+    <div class="container">
+        <div class="features__wrapper">
+            <div class="features__item">
+                <p>Отмечай просмотренные фильмы и сериалы</p>
+                <img src="img/icons/hand.png" alt="hand">
+            </div>
+            <div class="features__item">
+                <p>Составляй список для будущего просмотра</p>
+                <img src="img/icons/book.png" alt="book">
+            </div>
+            <div class="features__item">
+                <p>Делись мнением и находи единомышленников</p>
+                <img src="img/icons/knife.png" alt="knife">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="releases">
+    <div class="container">
+        <div class="releases__wrapper">
+            <div class="releases__title">Новые фильмы</div>
+            <div class="releases__posters">
+                <% var movieList %>
+                <% movieList.slice(0, 4).map((movie) => { %>
+                    <a href="/movie/<%= movie.id %>" class="releases__link">
+                        <img class="releases__poster"
+                             src='https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>'
+                             alt="film">
+                    </a>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+<%- include('footer') -%>
+<script src="js/index.js"></script>
+</html>

@@ -1,0 +1,27 @@
+<%- include('header') -%>
+
+<section class="registr">
+    <div class="container">
+        <div class="registr__wrapper">
+            <div class="registr__form">
+                <div class="registr__title">РЕГИСТРАЦИЯ</div>
+                <div class="registr__user-data">
+                    <form action="/register" method="post">
+                        <% if (message != undefined) { %>
+                            <h2 class="form__msg"> <%= message %> </h2>
+                        <% } %>
+                        <input type="text" class="registr__user-data-form" placeholder="Введите логин" name="username">
+                        <input type="password" class="registr__user-data-form" placeholder="Введите пароль"
+                               name="password">
+                        <button type="submit" class="registr__user-data-btn">Зарегистрироваться</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+<%- include('footer') -%>
+</html>

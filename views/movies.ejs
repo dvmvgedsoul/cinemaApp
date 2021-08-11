@@ -1,0 +1,40 @@
+<%- include('header') -%>
+<section class="slider">
+    <div class="slider__container">
+        <div class="slider__wrapper">
+            <% sliderList.forEach((movie) => { %>
+                <div class="slider__item">
+                    <p class="slider__item-title"><%= movie.title %></p>
+                    <a href="/movie/<%= movie.id %>">
+                        <img src="https://image.tmdb.org/t/p/original<%= movie.backdrop_path %>"
+                             alt="" class="slider__pic">
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+<section class="releases releases-movie">
+    <div class="container">
+        <div class="releases__wrapper">
+            <div class="releases__title">ПОПУЛЯРНОЕ</div>
+            <div class="releases__posters">
+                <% gridList.forEach((movie) => { %>
+                    <a href="/movie/<%= movie.id %>" class="releases__link">
+                        <img class="releases__poster" src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>"
+                             alt="fim">
+                    </a>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<%- include('footer') -%>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="slick/slick.min.js"></script>
+<script src="js/slider.js"></script>
+<script src="js/index.js"></script>
+</html>

@@ -1,0 +1,107 @@
+<%- include('moviePageHeader') -%>
+<section class="maininfo">
+    <div class="container">
+        <div class="maininfo__wrapper">
+            <div class="maininfo__poster">
+                <img src="https://image.tmdb.org/t/p/original/<%= movieDescr['poster_path'] %>" alt="theconjuring3">
+            </div>
+            <div class="maininfo__descr">
+                <div class="maininfo__title">
+                    <%= movieDescr['title'] %>
+                </div>
+                <div class="maininfo__title-orig">
+                    <p><%= movieDescr['original_title'] %></p>
+                </div>
+                <div class="maininfo__btns">
+                    <form action="/movie/<%= movieDescr['id'] %>/add" method="post">
+                        <% if (req.isAuthenticated() && req.user.addedFilms.indexOf(movieDescr['id']) !== -1) { %>
+                            <button type="submit" class="maininfo__btn maininfo__btn-add" name="movieDescr"
+                                    value="<%= movieDescr['id'] %>">
+                                <i class="small-btn fas fa-plus"></i>
+                            </button>
+                        <% } else { %>
+                            <button type="submit" class="maininfo__btn maininfo__btn-remove" name="movieDescr"
+                                    value="<%= movieDescr['id'] %>">
+                                <i class="small-btn fas fa-plus"></i>
+                            </button>
+                        <% } %>
+                    </form>
+                    <form action="/movie/<%= movieDescr['id'] %>/watch" method="post">
+                        <% if (req.isAuthenticated() && req.user.watchedFilms.indexOf(movieDescr['id']) !== -1) { %>
+                            <form>
+                                <button class="maininfo__btn maininfo__btn-add" name="movieDescr"
+                                        value="<%= movieDescr['id'] %>">
+                                    <i class="small-btn fas fa-eye"></i>
+                                </button>
+
+                            </form>
+                        <% } else { %>
+                            <button class="maininfo__btn maininfo__btn-remove" name="movieDescr"
+                                    value="<%= movieDescr['id'] %>">
+                                <i class="small-btn fas fa-eye"></i>
+                            </button>
+                        <% } %>
+                    </form>
+                    <button class="maininfo__btn-trailer">
+                        <i class="fas fa-play"></i>
+                        СМОТРЕТЬ ТРЕЙЛЕР
+                    </button>
+                </div>
+                <div class="maininfo__synopsis">
+                    <p><%= movieDescr['overview'] %></p>
+                </div>
+                <div class="maininfo__recs">
+                    <div class="maininfo__recs-title">рекомендации</div>
+                    <div class="maininfo__recs-posters">
+                        <% recImgs.forEach((item) => { %>
+                            <a href="/movie/<%= item.id %>">
+                                <img src="https://image.tmdb.org/t/p/original<%= item.poster_path %>" alt="film">
+                            </a>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="addinfo">
+    <div class="container">
+        <div class="addinfo__wrapper">
+            <div class="addinfo__title">ИНФОРМАЦИЯ О ФИЛЬМЕ</div>
+            <div class="addinfo__info">
+                <div class="addinfo__left">Дата релиза</div>
+                <div class="addinfo__right"><%= movieDescr['release_date'] %></div>
+                <div class="addinfo__left">Слоган</div>
+                <div class="addinfo__right"><%= movieDescr['tagline'] %></div>
+                <div class="addinfo__left">Жанр</div>
+                <div class="addinfo__right">
+                    <%= genres.join(', ') %>
+                </div>
+                <div class="addinfo__left">Продолжительность</div>
+                <div class="addinfo__right"><%= movieDescr['runtime'] %> минут</div>
+                <div class="addinfo__left">Рейтинг</div>
+                <div class="addinfo__right">18+</div>
+                <div class="addinfo__left">Статус</div>
+                <div class="addinfo__right"><%= movieDescr['status'] %></div>
+                <div class="addinfo__left">Язык оригинала</div>
+                <div class="addinfo__right"><%= movieDescr['original_language'] %></div>
+                <!--                <div class="addinfo__left">Ключевые слова</div>-->
+                <!--                <div class="addinfo__right">horror, religious horror</div>-->
+            </div>
+        </div>
+    </div>
+</section>
+<div class="trailer trailer__disabled">
+    <div class="trailer__video">
+        <iframe width="800" height="450" src="https://www.youtube.com/embed/<%= video %>"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+    </div>
+</div>
+</body>
+<%- include('footer') -%>
+<script src="../js/moviePageButtons.js"></script>
+</html>

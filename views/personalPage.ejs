@@ -1,0 +1,44 @@
+<%- include('header') -%>
+<section class="profile">
+    <div class="container">
+        <div class="profile__wrapper">
+            <div class="profile__info">
+                <div class="profile__pic"><img src="img/icons/pfp.png" alt="profile pic"></div>
+                <div class="profile__descr">
+                    <div class="profile__login"><%= user.username %></div>
+                    <button onclick="window.location.href = '/logout'" type="button" class="profile__logout">ВЫЙТИ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="profile-movies">
+    <div class="container">
+        <div class="profile-movies__wrapper">
+            <ul class="profile-movies__bar">
+                <li><p class="profile-movies__tab">Просмотрено</p></li>
+                <li><p class="profile-movies__tab">На очереди</p></li>
+            </ul>
+            <div class="profile-movies__line"></div>
+            <div class="profile-movies__posters">
+                <% userWatchedPosterList.forEach((poster) => { %>
+                    <a href="/movie/<%= poster.id %>">
+                        <img src="https://image.tmdb.org/t/p/original<%= poster.poster_path %>" alt="">
+                    </a>
+                <% }) %>
+            </div>
+            <div class="profile-movies__posters profile-movies__posters-hide">
+                <% userAddedPosterList.forEach((poster) => { %>
+                    <a href="/movie/<%= poster.id %>">
+                        <img src="https://image.tmdb.org/t/p/original<%= poster.poster_path %>" alt="">
+                    </a>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<%- include('footer') -%>
+<script src="js/personalPageTabs.js"></script>
+</html>
